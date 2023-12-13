@@ -25,3 +25,47 @@ A high-degree polynomial regression model applied to a small dataset may have hi
 
 Bias-Variance Trade-off:
 The bias-variance trade-off is a fundamental concept in machine learning, representing the balance between a model's ability to capture the underlying patterns in the data (low bias) and its sensitivity to noise and fluctuations (low variance). The goal is to find the optimal level of model complexity that minimizes both bias and variance, ultimately leading to better generalization performance on unseen data.
+
+### Q2- what are different ways to handle missing or corrupted data in a dataset
+
+##### Imputation:
+
+Imputation involves filling in missing values with estimated or calculated values based on the available data.
+
+Methods:
+
+a. Mean, Median, or Mode Imputation: Replace missing values with the mean, median, or mode of the observed values in the variable.eg - mean imputation -df['column_name'].fillna(df['column_name'].mean(), inplace=True)
+
+b. Linear Regression Imputation: Predict the missing values using a linear regression model based on other variables.
+
+c. k-Nearest Neighbors (KNN) Imputation: Replace missing values with the average of k-nearest neighbors in the feature space. -df_filled = KNN(k=3).fit_transform(df)
+
+##### Deletion:
+
+Deletion involves removing instances (rows) or features (columns) with missing or corrupted data.
+
+Methods:
+a. Listwise Deletion (Row Deletion): Remove entire rows with missing values.-df.dropna(inplace=True))
+
+b. Pairwise Deletion: Keep observations with valid values for specific analyses, ignoring missing values in other variables.
+
+c. Feature Deletion: Remove entire columns if a significant portion of their values are missing.-df.dropna(axis=1, inplace=True)
+
+Note:
+Deletion can lead to a reduction in the size of the dataset, potentially losing valuable information.It is suitable when the missing data is small in proportion to the total dataset.
+
+##### Data Augmentation:
+
+Data augmentation involves generating new samples based on the existing data to replace or supplement missing or corrupted values.
+
+Methods:
+
+Interpolation: Estimate missing values by interpolating between existing values.Linear Interpolation- df['column_name'].interpolate(method='linear', inplace=True)
+
+Extrapolation: Estimate missing values by extrapolating from existing values.
+
+Data Synthesis: Generate synthetic data to replace or supplement missing values.SMOTE FOR SYNTHETIC DATA- df_synthetic, _ = SMOTE().fit_resample(df, df['target_column'])
+
+Note:
+Data augmentation is useful when missing data follows a pattern that can be reasonably estimated or simulated.
+It requires careful consideration of the domain and the nature of the missing data.
